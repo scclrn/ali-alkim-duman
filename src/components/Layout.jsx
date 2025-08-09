@@ -20,12 +20,21 @@ export default function Layout() {
     { to: "/", label: t("nav.home") },
     { to: "/biography", label: t("nav.bio") },
     { to: "/films", label: t("nav.films") },
+    { to: "/photos", label: t("nav.photos") },
     { to: "/contact", label: t("nav.contact") },
   ];
 
   return (
     <>
-      <AppBar position="sticky" color="default" elevation={0}>
+      <AppBar
+        position="sticky"
+        color="transparent"
+        elevation={0}
+        sx={{
+          backdropFilter: "saturate(180%) blur(8px)",
+          bgcolor: "rgba(0,0,0,.35)",
+        }}
+      >
         <Toolbar sx={{ gap: 2 }}>
           <Typography variant="h6" sx={{ flexGrow: 1 }}>
             {t("siteTitle")}
@@ -46,7 +55,7 @@ export default function Layout() {
           </Box>
         </Toolbar>
       </AppBar>
-      <Container sx={{ py: 6 }}>
+      <Container maxWidth="lg" sx={{ py: { xs: 4, md: 6 } }}>
         <Outlet />
       </Container>
     </>
