@@ -5,7 +5,7 @@ function App() {
     <>
       <h1>
         Selam, ben Ali Alkım Duman. Ama insanlar bana kısaca Zeki Demirkubuz
-        derler.
+        derler. devden slm
       </h1>
     </>
   );
