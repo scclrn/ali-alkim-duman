@@ -7,10 +7,15 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
+# Node / Build Artifacts
 node_modules
+.dist
+# CHANGED: dist klasörü zaten vardı, noktalı varyantı da bazen oluşabiliyor (örn. IDE eklentileri)
 dist
 dist-ssr
-*.local
+.vite/
+.eslintcache   # ADDED: ESLint cache
+coverage/      # ADDED: Test/coverage çıktıları (ileride eklenebilir)
 
 # Editor directories and files
 .vscode/*
@@ -22,3 +27,13 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+Thumbs.db
+
+# Env
+.env
+.env.*
+.env.local    
+
+# Tooling / Hosting
+.vercel/      # ADDED: Vercel deploy klasörü
+.netlify/     # ADDED: Netlify
