@@ -10,6 +10,7 @@ import Biography from "./pages/Biography";
 import Films from "./pages/Films";
 import Photos from "./pages/Photos";
 import Contact from "./pages/Contact";
+import FilmDetail from "./pages/FilmDetail";
 
 export default function App() {
   const { i18n } = useTranslation();
@@ -39,6 +40,7 @@ export default function App() {
           <Route path="/films" element={<Films />} />
           <Route path="/photos" element={<Photos />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/films/:id" element={<FilmDetail />} />
         </Route>
       </Routes>
     </ThemeProvider>
