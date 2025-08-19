@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import FullBleed from "../components/common/FullBleed";
 import Hero from "../components/home/Hero";
@@ -7,22 +7,21 @@ import FilmsPreview from "../components/home/FilmsPreview";
 import VideoSection from "../components/home/VideoSection";
 import SocialFooter from "../components/home/SocialFooter";
 
-// Resimler
-import heroPoster from "../assets/poster.jpg";
-import film1 from "../assets/film-posters/tiksinti.png";
-import film2 from "../assets/i2.jpg";
-import film3 from "../assets/kd2.jpg";
-import film4 from "../assets/ki2.jpg";
+// Hero görseli assets'ten import (Vite build ile doğru URL'e dönüştürülür)
+import heroPoster from "../assets/alkim/poster.jpg";
+
+// Filmler artık merkezi kaynaktan (id'ler FilmDetail ile uyumlu)
+import { films as allFilms } from "../data/films";
 
 export default function Home() {
   const { t } = useTranslation();
 
-  const films = [
-    { id: 1, title: "Tiksinti", year: 2024, poster: film1 },
-    { id: 2, title: "Film Two", year: 2022, poster: film2 },
-    { id: 3, title: "Film Three", year: 2023, poster: film3 },
-    { id: 4, title: "Film Four", year: 2024, poster: film4 },
-  ];
+  // En yeni 4 filmi seç (yıla göre azalan)
+  const latest = useMemo(
+    () =>
+      [...allFilms].sort((a, b) => Number(b.year) - Number(a.year)).slice(0, 4),
+    []
+  );
 
   const social = {
     instagram: "https://www.instagram.com/alialkimdmn/",
@@ -52,12 +51,13 @@ export default function Home() {
         cta={t("home.readBio", { defaultValue: "Biyografiyi Gör" })}
       />
 
-      <FilmsPreview films={films} heading={t("home.latestFilmsHeading")} />
+      {/* Ana sayfadaki grid artık data/films'ten gelen id/poster'ları kullanır */}
+      <FilmsPreview films={latest} heading={t("home.latestFilmsHeading")} />
 
       <VideoSection
         heading={t("home.videoHeading")}
-        videoId={"dQw4w9WgXcQ"}
-        coverSrc={film1}
+        videoId={"lUg68A4LNk4"}
+        coverSrc={latest[0]?.poster}
       />
 
       <SocialFooter links={social} />

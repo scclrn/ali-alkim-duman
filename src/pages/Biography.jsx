@@ -1,16 +1,22 @@
 import React from "react";
-import { Typography, Stack } from "@mui/material";
+import { Stack } from "@mui/material";
 import { useTranslation } from "react-i18next";
+import BioHeader from "../components/bio/BioHeader";
+import BioProse from "../components/bio/BioProse";
 
 export default function Biography() {
   const { t } = useTranslation();
+  const text = t("bio.content");
+
   return (
-    <Stack spacing={2}>
-      <Typography variant="h4">{t("bio.heading")}</Typography>
-      <Typography variant="body1">
-        {/* Biyografi içeriğini burada düzenleyeceğiz. İleride statik veri/markdown bağlayabiliriz. */}
-        ...
-      </Typography>
-    </Stack>
+    <>
+      <title>
+        {t("bio.heading")} — {t("siteTitle")}
+      </title>
+      <Stack spacing={{ xs: 3, md: 5 }}>
+        <BioHeader />
+        <BioProse text={text} />
+      </Stack>
+    </>
   );
 }

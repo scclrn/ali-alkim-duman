@@ -1,33 +1,39 @@
-import React from "react";
-import { Typography, Grid, Card, CardContent } from "@mui/material";
+import React, { useMemo } from "react";
+import { Stack, Typography } from "@mui/material";
 import { useTranslation } from "react-i18next";
+import { films } from "../data/films";
+import YearSection from "../components/films/YearSection";
 
 export default function Films() {
   const { t } = useTranslation();
-  const sample = [
-    { id: 1, title: "Film One", year: 2021 },
-    { id: 2, title: "Film Two", year: 2023 },
-  ];
+
+  const grouped = useMemo(() => {
+    const acc = {};
+    for (const f of films) {
+      const y = Number(f.year);
+      (acc[y] ||= []).push(f);
+    }
+    return acc;
+  }, []);
+  const yearsDesc = useMemo(
+    () =>
+      Object.keys(grouped)
+        .map(Number)
+        .sort((a, b) => b - a),
+    [grouped]
+  );
 
   return (
     <>
-      <Typography variant="h4" gutterBottom>
-        {t("films.heading")}
-      </Typography>
-      <Grid container spacing={2}>
-        {sample.map((f) => (
-          <Grid key={f.id} item xs={12} sm={6} md={4}>
-            <Card>
-              <CardContent>
-                <Typography variant="h6">{f.title}</Typography>
-                <Typography variant="body2" color="text.secondary">
-                  {f.year}
-                </Typography>
-              </CardContent>
-            </Card>
-          </Grid>
+      <title>
+        {t("films.heading")} — {t("siteTitle")}
+      </title>
+      <Stack spacing={4}>
+        <Typography variant="h4">{t("films.heading")}</Typography>
+        {yearsDesc.map((y) => (
+          <YearSection key={y} year={y} films={grouped[y]} />
         ))}
-      </Grid>
+      </Stack>
     </>
   );
 }
