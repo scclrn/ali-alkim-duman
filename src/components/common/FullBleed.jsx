@@ -10,7 +10,7 @@ export default function FullBleed({ children, sx }) {
         right: "50%",
         ml: "-50vw",
         mr: "-50vw",
-        width: "100vw",
+        width: "99.5vw",
         mt: { xs: -6 },
         ...sx,
       }}

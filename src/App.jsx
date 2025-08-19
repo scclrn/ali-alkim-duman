@@ -41,6 +41,7 @@ export default function App() {
           <Route path="/photos" element={<Photos />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/films/:id" element={<FilmDetail />} />
+          <Route path="*" element={<Home />} />
         </Route>
       </Routes>
     </ThemeProvider>

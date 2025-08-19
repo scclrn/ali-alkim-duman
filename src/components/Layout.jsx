@@ -1,5 +1,5 @@
 import React from "react";
-import { Outlet, Link as RouterLink, useLocation } from "react-router-dom";
+import { Outlet, Link as RouterLink, useLocation, useNavigate } from "react-router-dom";
 import {
   AppBar,
   Toolbar,
@@ -11,10 +11,12 @@ import {
 import TranslateIcon from "@mui/icons-material/Translate";
 import { useTranslation } from "react-i18next";
 import LanguageSwitcher from "./LanguageSwitcher";
+import CustomAppBar from "./CustomAppBar";
 
 export default function Layout() {
   const { t } = useTranslation();
   const location = useLocation();
+  const navigate = useNavigate();
 
   const nav = [
     { to: "/", label: t("nav.home") },
@@ -26,7 +28,7 @@ export default function Layout() {
 
   return (
     <>
-      <AppBar
+      {/* <AppBar
         position="sticky"
         color="transparent"
         elevation={0}
@@ -42,8 +44,7 @@ export default function Layout() {
           {nav.map((item) => (
             <Button
               key={item.to}
-              component={RouterLink}
-              to={item.to}
+              onClick={() => navigate(item.to)}
               variant={location.pathname === item.to ? "contained" : "text"}
             >
               {item.label}
@@ -54,7 +55,8 @@ export default function Layout() {
             <LanguageSwitcher />
           </Box>
         </Toolbar>
-      </AppBar>
+      </AppBar> */}
+      <CustomAppBar />
       <Container maxWidth="lg" sx={{ py: { xs: 4, md: 6 } }}>
         <Outlet />
       </Container>
